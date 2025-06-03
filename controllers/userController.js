@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import { errorResponse, successResponse } from "../utils/helper";
+import User from "../models/userModel.js";
+import { errorResponse, successResponse } from "../utils/helper.js";
 
 export const register = async (req,res) =>{
     try{
