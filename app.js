@@ -7,5 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/',userRoutes);
-
+app.get('/home',(req,res)=>{
+    res.send('hello')
+})
 export default app;

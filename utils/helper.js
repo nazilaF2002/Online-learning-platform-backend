@@ -1,11 +1,11 @@
-export const successResponse = (res,statusCode,{data}) => {
-    res.status(statusCode).json({
+export const successResponse = (res,statusCode,data={}) => {
+   return res.status(statusCode).json({
         data
     });
 };
 
-export const errorResponse = (res,statusCode,{message}) => {
-   res.status(statusCode).json({
-    message
+export const errorResponse = (res,statusCode,message={}) => {
+   return res.status(statusCode).json({
+       message
    });
 };

@@ -1,9 +1,9 @@
 import env from 'dotenv';
 env.config();
 import app from "./app.js";
-import dbconected from './db.js';
+import dbconected from './config/db.js';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 dbconected();
 app.listen(PORT,()=>{
