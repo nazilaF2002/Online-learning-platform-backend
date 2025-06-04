@@ -1,13 +1,13 @@
-import mongoose, { model } from "mongoose";
-import { Schema } from "mongoose";
+import { Schema ,model } from "mongoose";
 
 const userSchema = new Schema({
-    name : {
-        type : String,
-        required : true
+    googleId : {
+        type: String,
+        unique:true,
+        sparse: true
     },
-    lastName : {
-        type :  String,
+    fullName : {
+        type : String,
         required : true
     },
     email : {
@@ -17,8 +17,11 @@ const userSchema = new Schema({
     },
     password : {
         type : String,
-        required : true
-    }
+        required: function () {
+            return !this.googleId;
+          }
+    },
+   
 });
 
 const User = model("User",userSchema);
