@@ -15,28 +15,12 @@ const userSchema = new Schema({
         required : true,
         unique: true
     },
-    // password : {
-    //     type : String,
-    //     required: function () {
-    //         return !this.googleId;
-    //       }
-    // },
-//     password: {
-//   type: String,
-//   validate: {
-//     validator: function (value) {
-//       if (!this.googleId && !value) {
-//         return false;
-//       }
-//       return true;
-//     },
-//     message: 'Password is required if not using Google login.'
-//   }
-// }
-  password:{
-    type : String,
-  }
-   
+    password : {
+        type : String,
+        required: function () {
+            return !this.googleId;
+          }
+    }, 
 });
 
 const User = model("User",userSchema);
