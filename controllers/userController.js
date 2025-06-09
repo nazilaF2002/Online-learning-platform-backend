@@ -6,7 +6,7 @@ export const register = async (req,res) =>{
         const {fullName,email,password:pss} = req.body;
         const isEmailExist = await User.findOne({email});
         if(isEmailExist) return errorResponse(res,400,{message:'user already exits please login'});
-        const password = await hashPassword(pss);
+        let password = await hashPassword(pss);
         const user = await User.create({fullName,email,password});
         successResponse(res,201,{user});
     }
@@ -19,7 +19,7 @@ export const register = async (req,res) =>{
 export const login = async (req,res) => {
     try{
         const {email,password} = req.body;
-        const user = await User.findOne({email});
+        let user = await User.findOne({email});
         if (!user) return errorResponse(res,404,{message: 'user not found'});
         
         if (! await comparePassword(password,User.password)) return errorResponse(res,401,{message: 'password is not correct'});
