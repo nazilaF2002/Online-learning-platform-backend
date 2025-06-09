@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 import { errorResponse, successResponse } from "../utils/helper.js";
-import { hashPassword } from "../utils/auth.js";
+import { comparePassword, hashPassword } from "../utils/auth.js";
 export const register = async (req,res) =>{
     try{
         const {fullName,email,password:pss} = req.body;
@@ -22,7 +22,7 @@ export const login = async (req,res) => {
         const user = await User.findOne({email});
         if (!user) return errorResponse(res,404,{message: 'user not found'});
         
-        if (!hashPassword(password,User.password)) return errorResponse(res,401,{message: 'password is not correct'});
+        if (! await comparePassword(password,User.password)) return errorResponse(res,401,{message: 'password is not correct'});
         // if (user.password !== password) return errorResponse(res,401,{message: 'password is not correct'});
          
           successResponse(res,200,{message:'suer logedin successfully'})
