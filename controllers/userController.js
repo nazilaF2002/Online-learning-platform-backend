@@ -22,7 +22,7 @@ export const login = async (req,res) => {
         let user = await User.findOne({email});
         if (!user) return errorResponse(res,404,{message: 'user not found'});
         
-        if (!(await comparePassword(password,User.password))) return errorResponse(res,401,{message: 'password is not correct'});
+        if (!(await comparePassword(password,user.password))) return errorResponse(res,401,{message: 'password is not correct'});
         // if (user.password !== password) return errorResponse(res,401,{message: 'password is not correct'});
          
           successResponse(res,200,{message:'suer logedin successfully'})
