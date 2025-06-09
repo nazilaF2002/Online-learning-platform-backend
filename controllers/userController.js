@@ -3,11 +3,11 @@ import { errorResponse, successResponse } from "../utils/helper.js";
 import { comparePassword, hashPassword } from "../utils/auth.js";
 export const register = async (req,res) =>{
     try{
-        const {fullName,email,password:pss} = req.body;
+        let {fullName,email,password:pss} = req.body;
         const isEmailExist = await User.findOne({email});
         if(isEmailExist) return errorResponse(res,400,{message:'user already exits please login'});
         let password = await hashPassword(pss);
-        const user = await User.create({fullName,email,password});
+        let user = await User.create({fullName,email,password});
         successResponse(res,201,{user});
     }
     catch(err){
