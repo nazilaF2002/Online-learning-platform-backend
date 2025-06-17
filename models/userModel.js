@@ -1,4 +1,4 @@
-import { Schema ,model } from "mongoose";
+import mongoose, { Schema ,model } from "mongoose";
 
 const userSchema = new Schema({
     googleId : {
@@ -21,7 +21,13 @@ const userSchema = new Schema({
             return !this.googleId;
           }
     }, 
-});
+    rolle: {
+        type: String,
+        enum:["student","teacher","admin"],
+    },
+    course : [{type:mongoose.Schema.Types.ObjectId,
+    ref : "Course"}],
+},{timestamps: true});
 
 const User = model("User",userSchema);
 export default User;
